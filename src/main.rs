@@ -12,6 +12,7 @@ fn main() {
         println!("4. Eliminar todos");
         println!("------------------------------");
 
+        let usuario = Carpeta::obtener_usuario().unwrap();
         let mut opcion = String::new();
         io::stdin().read_line(&mut opcion).unwrap();
         let opcion: u32 = match opcion.trim().parse() {
@@ -21,6 +22,7 @@ fn main() {
                 continue;
             }
         };
+
 
         match opcion {
             1 => {
@@ -46,7 +48,7 @@ fn main() {
                 }
             }
             3 => {
-                let carpeta = Carpeta::new("C:\\Users\\Juan\\AppData\\Local\\Temp".to_string());
+                let carpeta = Carpeta::new(format!("C:\\Users\\{}\\AppData\\Local\\Temp", usuario));
                 match carpeta.eliminar_data_all() {
                     Ok(_) => {
                         println!("Se eliminó el contenido de la carpeta C:\\Users\\%username%\\AppData\\Local\\Temp");

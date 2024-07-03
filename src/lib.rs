@@ -2,6 +2,9 @@ use sysinfo::{ProcessExt, System, SystemExt};
 use std::fs;
 use std::path::Path;
 use std::io;
+use std::ptr;
+use winapi::um::winbase::GetUserNameW;
+use winapi::um::winnt::LPWSTR;
 
 pub struct Carpeta {
     pub url: String,
@@ -12,6 +15,19 @@ impl Carpeta {
         Carpeta { url }
     }
 
+    pub fn obtener_usuario() -> Result<String, String> {
+        let mut buffer: [u16; 256] = [0; 256];
+        let mut size = buffer.len() as u32;
+
+        unsafe {
+            if GetUserNameW(buffer.as_mut_ptr(), &mut size) == 0 {
+                return Err("No se pudo obtener el nombre de usuario".to_string());
+            }
+        }
+
+        let username = String::from_utf16_lossy(&buffer[..(size as usize - 1)]);
+        Ok(username)
+    }
     pub fn eliminar_data_all(&self) -> io::Result<()> {
         let path = Path::new(&self.url);
         if !path.is_dir() {

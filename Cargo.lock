@@ -44,6 +44,7 @@ name = "delete-files-temporal"
 version = "0.1.0"
 dependencies = [
  "sysinfo",
+ "winapi",
 ]
 
 [[package]]
