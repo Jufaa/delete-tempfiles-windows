@@ -59,11 +59,13 @@ fn main() {
                 }
             }
             4 => {
-                let urls = vec![
+                let mut urls = vec![
                     "C:\\Windows\\Temp",
                     "C:\\Windows\\Prefetch",
-                    "C:\\Users\\Juan\\AppData\\Local\\Temp",
                 ];
+
+                let ruta_temp = format!("C:\\Users\\{}\\AppData\\Local\\Temp", usuario);
+                urls.push(&ruta_temp);
 
                 for url in urls {
                     let carpeta = Carpeta::new(url.to_string());
