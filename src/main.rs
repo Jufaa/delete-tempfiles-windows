@@ -60,7 +60,7 @@ fn main() {
                 let urls = vec![
                     "C:\\Windows\\Temp",
                     "C:\\Windows\\Prefetch",
-                    "C:\\Users\\%username%\\AppData\\Local\\Temp",
+                    "C:\\Users\\Juan\\AppData\\Local\\Temp",
                 ];
 
                 for url in urls {
